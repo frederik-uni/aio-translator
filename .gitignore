@@ -1,7 +1,4 @@
 /target
-/Cargo.lock
 .env
 /models
-/.idea
-translators.iml
-test.csv
+.DS_Store

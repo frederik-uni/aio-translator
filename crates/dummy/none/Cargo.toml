@@ -1,0 +1,8 @@
+[package]
+name = "none"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+interface.workspace = true
+reqwest.workspace = true

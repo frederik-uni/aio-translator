@@ -1,0 +1,8 @@
+[package]
+name = "lingua"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+lingua-rs = { workspace = true }
+interface.workspace = true

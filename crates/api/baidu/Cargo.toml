@@ -1,0 +1,17 @@
+[package]
+name = "baidu"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+serde_json.workspace = true
+serde = { workspace = true, features = ["derive"] }
+reqwest = { workspace = true, features = ["json"] }
+interface.workspace = true
+async-trait.workspace = true
+md5.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }
+iso-639 = "0.1.0"
+rust_iso639 = "0.0.3"

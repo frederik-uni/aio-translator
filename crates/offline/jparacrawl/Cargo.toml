@@ -1,0 +1,17 @@
+[package]
+name = "jparacrawl"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+interface.workspace = true
+ct2rs = { workspace = true, default-features = false, features = [
+    "os-defaults",
+] }
+
+interface-model = { workspace = true, default-features = false }
+base-util = { workspace = true, default-features = false }
+maplit.workspace = true
+env_logger.workspace = true
+log = "0.4.27"
+anyhow.workspace = true

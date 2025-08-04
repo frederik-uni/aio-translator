@@ -1,0 +1,8 @@
+[package]
+name = "whatlang"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+whatlang-rs.workspace = true
+interface.workspace = true

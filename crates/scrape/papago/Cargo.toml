@@ -1,0 +1,18 @@
+[package]
+name = "papago"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+base64.workspace = true
+hmac.workspace = true
+md-5.workspace = true
+regex.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+serde = { workspace = true, features = ["derive"] }
+interface.workspace = true
+uuid = { workspace = true, features = ["v4"] }
+async-trait.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }

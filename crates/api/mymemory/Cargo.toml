@@ -1,0 +1,16 @@
+[package]
+name = "mymemory"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+serde_json.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+scraper.workspace = true
+interface.workspace = true
+async-trait.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["full"] }
+dotenv.workspace = true
+scraper.workspace = true

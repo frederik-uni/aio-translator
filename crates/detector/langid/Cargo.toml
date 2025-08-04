@@ -1,0 +1,8 @@
+[package]
+name = "langid"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+langid-rs.workspace = true
+interface.workspace = true

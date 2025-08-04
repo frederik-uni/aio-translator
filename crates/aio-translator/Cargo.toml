@@ -1,0 +1,32 @@
+[package]
+name = "aio-translator"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
+none.workspace = true
+original.workspace = true
+jparacrawl.workspace = true
+m2m100.workspace = true
+nllb.workspace = true
+sugoi.workspace = true
+interface.workspace = true
+lingua = { workspace = true, optional = true }
+whatlang = { workspace = true, optional = true }
+langid.workspace = true
+deepl.workspace = true
+papago.workspace = true
+mymemory.workspace = true
+google.workspace = true
+caiyun.workspace = true
+baidu.workspace = true
+youdao.workspace = true
+fancy-regex.workspace = true
+arabic_reshaper.workspace = true
+unicode-general-category = "1.0.0"
+async-trait.workspace = true
+ct2rs = { workspace = true, default-features = false }
+
+[features]
+lingua = ["dep:lingua"]
+whatlang = ["dep:whatlang"]

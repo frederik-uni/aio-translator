@@ -1,0 +1,6 @@
+[package]
+name = "chatgpt"
+edition.workspace = true
+version.workspace = true
+
+[dependencies]
