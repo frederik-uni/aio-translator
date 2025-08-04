@@ -43,7 +43,7 @@ dependencies = [
 
 [[package]]
 name = "aio-translator"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "arabic_reshaper",
  "async-trait",
@@ -56,7 +56,7 @@ dependencies = [
  "interface",
  "jparacrawl",
  "langid",
- "lingua 0.1.0",
+ "lingua 1.0.0",
  "m2m100",
  "mymemory",
  "nllb",
@@ -65,7 +65,7 @@ dependencies = [
  "papago",
  "sugoi",
  "unicode-general-category",
- "whatlang 0.1.0",
+ "whatlang 1.0.0",
  "youdao",
 ]
 
@@ -201,7 +201,7 @@ dependencies = [
 
 [[package]]
 name = "baidu"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "interface",
@@ -320,7 +320,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "caiyun"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "dotenv",
@@ -356,7 +356,7 @@ checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
 
 [[package]]
 name = "chatgpt"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "clap"
@@ -727,7 +727,7 @@ dependencies = [
 
 [[package]]
 name = "deepl"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -741,7 +741,7 @@ dependencies = [
 
 [[package]]
 name = "deepseek"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "der"
@@ -1090,7 +1090,7 @@ dependencies = [
 
 [[package]]
 name = "gemini"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "generic-array"
@@ -1142,7 +1142,7 @@ checksum = "07e28edb80900c19c28f1072f2e8aeca7fa06b23cd4169cefe1af5aa3260783f"
 
 [[package]]
 name = "google"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "dotenv",
@@ -1155,7 +1155,7 @@ dependencies = [
 
 [[package]]
 name = "groq"
-version = "0.1.0"
+version = "1.0.0"
 
 [[package]]
 name = "h2"
@@ -1519,7 +1519,7 @@ dependencies = [
 
 [[package]]
 name = "interface"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1647,7 +1647,7 @@ dependencies = [
 
 [[package]]
 name = "jparacrawl"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -1671,7 +1671,7 @@ dependencies = [
 
 [[package]]
 name = "lang-generator"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "csv",
  "heck",
@@ -1687,7 +1687,7 @@ dependencies = [
 
 [[package]]
 name = "langid"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "interface",
  "langid-rs",
@@ -1724,7 +1724,7 @@ dependencies = [
 
 [[package]]
 name = "lingua"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "interface",
  "lingua 1.7.2",
@@ -2543,7 +2543,7 @@ checksum = "13dc2df351e3202783a1fe0d44375f7295ffb4049267b0f3018346dc122a1d94"
 
 [[package]]
 name = "m2m100"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -2619,7 +2619,7 @@ dependencies = [
 
 [[package]]
 name = "mbart50"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -2707,7 +2707,7 @@ dependencies = [
 
 [[package]]
 name = "mymemory"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "dotenv",
@@ -2758,7 +2758,7 @@ checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
 
 [[package]]
 name = "nllb"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -2781,7 +2781,7 @@ dependencies = [
 
 [[package]]
 name = "none"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "interface",
  "reqwest",
@@ -2955,7 +2955,7 @@ dependencies = [
 
 [[package]]
 name = "original"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "interface",
  "reqwest",
@@ -2988,7 +2988,7 @@ dependencies = [
 
 [[package]]
 name = "papago"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -3195,7 +3195,7 @@ dependencies = [
 
 [[package]]
 name = "qwen2"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -3809,7 +3809,7 @@ checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
 
 [[package]]
 name = "sugoi"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "base-util",
@@ -4492,20 +4492,20 @@ dependencies = [
 
 [[package]]
 name = "whatlang"
-version = "0.1.0"
-dependencies = [
- "interface",
- "whatlang 0.16.4",
-]
-
-[[package]]
-name = "whatlang"
 version = "0.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "471d1c1645d361eb782a1650b1786a8fb58dd625e681a04c09f5ff7c8764a7b0"
 dependencies = [
  "hashbrown 0.14.5",
  "once_cell",
+]
+
+[[package]]
+name = "whatlang"
+version = "1.0.0"
+dependencies = [
+ "interface",
+ "whatlang 0.16.4",
 ]
 
 [[package]]
@@ -4781,7 +4781,7 @@ dependencies = [
 
 [[package]]
 name = "youdao"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "async-trait",
  "dotenv",
