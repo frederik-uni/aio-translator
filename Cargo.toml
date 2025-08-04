@@ -39,24 +39,24 @@ reqwest = "0.12.22"
 anyhow = "1.0.98"
 tokio = "1.47"
 scraper = "0.23.1"
-lang-generator = { path = "crates/lang-generator" }
-interface = { path = "crates/interface" }
-jparacrawl = { path = "crates/offline/jparacrawl" }
-m2m100 = { path = "crates/offline/m2m100" }
-nllb = { path = "crates/offline/nllb" }
-sugoi = { path = "crates/offline/sugoi" }
-none = { path = "crates/dummy/none" }
-original = { path = "crates/dummy/original" }
-langid = { path = "crates/detector/langid" }
-whatlang = { path = "crates/detector/whatlang" }
-lingua = { path = "crates/detector/lingua" }
-deepl = { path = "crates/api/deepl" }
-papago = { path = "crates/scrape/papago" }
-mymemory = { path = "crates/api/mymemory" }
-caiyun = { path = "crates/api/caiyun" }
-google = { path = "crates/api/google" }
-baidu = { path = "crates/api/baidu" }
-youdao = { path = "crates/api/youdao" }
+aio-translator-lang-generator = { path = "crates/lang-generator", version = "1.0.0" }
+aio-translator-interface = { path = "crates/interface", version = "1.0.0" }
+aio-translator-jparacrawl = { path = "crates/offline/jparacrawl", version = "1.0.0" }
+aio-translator-m2m100 = { path = "crates/offline/m2m100", version = "1.0.0" }
+aio-translator-nllb = { path = "crates/offline/nllb", version = "1.0.0" }
+aio-translator-sugoi = { path = "crates/offline/sugoi", version = "1.0.0" }
+aio-translator-none = { path = "crates/dummy/none", version = "1.0.0" }
+aio-translator-original = { path = "crates/dummy/original", version = "1.0.0" }
+aio-translator-langid = { path = "crates/detector/langid", version = "1.0.0" }
+aio-translator-whatlang = { path = "crates/detector/whatlang", version = "1.0.0" }
+aio-translator-lingua = { path = "crates/detector/lingua", version = "1.0.0" }
+aio-translator-deepl = { path = "crates/api/deepl", version = "1.0.0" }
+aio-translator-papago = { path = "crates/scrape/papago", version = "1.0.0" }
+aio-translator-mymemory = { path = "crates/api/mymemory", version = "1.0.0" }
+aio-translator-caiyun = { path = "crates/api/caiyun", version = "1.0.0" }
+aio-translator-google = { path = "crates/api/google", version = "1.0.0" }
+aio-translator-baidu = { path = "crates/api/baidu", version = "1.0.0" }
+aio-translator-youdao = { path = "crates/api/youdao", version = "1.0.0" }
 serde_json = "1.0"
 serde = "1.0.219"
 md5 = "0.8.0"

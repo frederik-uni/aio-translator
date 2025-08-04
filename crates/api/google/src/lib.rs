@@ -1,6 +1,6 @@
-use interface::{
+use aio_translator_interface::{
     AsyncTranslator, Language, TranslationListOutput, TranslationOutput, Translator,
-    TranslatorTrait, error::Error, prompt::PromptBuilder,
+    TranslatorMutTrait, TranslatorTrait, error::Error, prompt::PromptBuilder,
 };
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
@@ -10,6 +10,7 @@ pub struct GoogleTranslator {
     client: Client,
     api_key: String,
 }
+
 #[derive(Serialize, Deserialize)]
 struct Languages1 {
     language: String,
@@ -27,12 +28,12 @@ impl Translator for GoogleTranslator {
     fn local(&self) -> bool {
         false
     }
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Async(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Async(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Async(self)
     }
 }
 
@@ -134,7 +135,7 @@ struct Root1 {
 
 #[cfg(test)]
 mod tests {
-    use interface::{Language, Translator as _};
+    use aio_translator_interface::{Language, Translator as _};
 
     use crate::GoogleTranslator;
 

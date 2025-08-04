@@ -3,8 +3,8 @@ pub mod prompt;
 pub mod tokenizer;
 
 use crate::{error::Error, prompt::PromptBuilder};
+use aio_translator_lang_generator::generate_language;
 pub use interface_model::Model;
-use lang_generator::generate_language;
 
 generate_language!();
 

@@ -1,13 +1,14 @@
 [package]
-name = "baidu"
+name = "aio-translator-baidu"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 serde_json.workspace = true
 serde = { workspace = true, features = ["derive"] }
 reqwest = { workspace = true, features = ["json"] }
-interface.workspace = true
+aio-translator-interface.workspace = true
 async-trait.workspace = true
 md5.workspace = true
 

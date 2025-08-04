@@ -1,9 +1,9 @@
-use async_trait::async_trait;
-use fancy_regex::Regex;
-use interface::{
+use aio_translator_interface::{
     AsyncTranslator, BlockingTranslator, Language, TranslationListOutput, TranslationOutput,
     Translator, TranslatorMutTrait, TranslatorTrait, error::Error, prompt::PromptBuilder,
 };
+use async_trait::async_trait;
+use fancy_regex::Regex;
 use unicode_general_category::{GeneralCategory, get_general_category};
 
 pub struct StyleTransfer<T: Translator> {
@@ -15,13 +15,13 @@ impl<T: Translator + Send + Sync> Translator for StyleTransfer<T> {
         self.t.local()
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         match self.t.translator() {
             TranslatorTrait::Async(_) => TranslatorTrait::Async(self),
             TranslatorTrait::Blocking(_) => TranslatorTrait::Blocking(self),
         }
     }
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
         match self.t.translator_mut() {
             TranslatorMutTrait::Async(_) => TranslatorMutTrait::Async(self),
             TranslatorMutTrait::Blocking(_) => TranslatorMutTrait::Blocking(self),

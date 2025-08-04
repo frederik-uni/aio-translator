@@ -1,13 +1,13 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
+use aio_translator_interface::error::Error;
+use aio_translator_interface::prompt::PromptBuilder;
+use aio_translator_interface::{
+    AsyncTranslator, Language, TranslationListOutput, TranslationOutput, Translator,
+    TranslatorMutTrait, TranslatorTrait,
+};
 use base64::Engine;
 use hmac::{Hmac, Mac};
-use interface::error::Error;
-use interface::prompt::PromptBuilder;
-use interface::{
-    AsyncTranslator, Language, TranslationListOutput, TranslationOutput, Translator,
-    TranslatorTrait,
-};
 use md5::Md5;
 use regex::Regex;
 use reqwest::Client;
@@ -38,12 +38,12 @@ impl Translator for PapagoTranslator {
         false
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Async(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Async(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Async(self)
     }
 }
 
@@ -219,7 +219,7 @@ struct Root1 {
 
 #[cfg(test)]
 mod tests {
-    use interface::{Language, Translator as _};
+    use aio_translator_interface::{Language, Translator as _};
 
     use crate::{PapagoTranslator, get_languages};
 
@@ -234,7 +234,7 @@ mod tests {
 
     #[tokio::test]
     async fn translate_unknown() {
-        let mut trans = PapagoTranslator::new(false)
+        let trans = PapagoTranslator::new(false)
             .await
             .expect("Failed to create translator");
         let trans = trans.translator();
@@ -256,7 +256,7 @@ mod tests {
 
     #[tokio::test]
     async fn translate_known() {
-        let mut trans = PapagoTranslator::new(false)
+        let trans = PapagoTranslator::new(false)
             .await
             .expect("Failed to create translator");
         let trans = trans.translator();

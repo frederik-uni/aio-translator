@@ -1,31 +1,31 @@
 mod style_transfer;
 
-pub use interface::{
+pub use aio_translator_interface::{
     AsyncTranslator, BlockingTranslator, Detector, Language, Model, TranslationListOutput,
     TranslationOutput, Translator, TranslatorTrait, error::ApiError, error::Error,
     prompt::PromptBuilder,
 };
 
-pub use baidu::BaiduTranslator;
-pub use caiyun::CaiyunTranslator;
-pub use ct2rs::ComputeType;
-pub use deepl::DeeplTranslator;
-pub use google::GoogleTranslator;
-pub use jparacrawl::JParaCrawlTranslator;
-pub use langid::LangIdDetector;
+pub use aio_translator_baidu::BaiduTranslator;
+pub use aio_translator_caiyun::CaiyunTranslator;
+pub use aio_translator_deepl::DeeplTranslator;
+pub use aio_translator_google::GoogleTranslator;
+pub use aio_translator_jparacrawl::JParaCrawlTranslator;
+pub use aio_translator_langid::LangIdDetector;
 #[cfg(feature = "lingua")]
-pub use lingua::LinguaDetector;
-pub use m2m100::M2M100Translator;
-pub use mymemory::MyMemoryTranslator;
-pub use nllb::NLLBTranslator;
-pub use none::NoneTranslator;
-pub use original::OriginalTranslator;
-pub use papago::PapagoTranslator;
-pub use style_transfer::StyleTransfer;
-pub use sugoi::SugoiTranslator;
+pub use aio_translator_lingua::LinguaDetector;
+pub use aio_translator_m2m100::M2M100Translator;
+pub use aio_translator_mymemory::MyMemoryTranslator;
+pub use aio_translator_nllb::NLLBTranslator;
+pub use aio_translator_none::NoneTranslator;
+pub use aio_translator_original::OriginalTranslator;
+pub use aio_translator_papago::PapagoTranslator;
+pub use aio_translator_sugoi::SugoiTranslator;
 #[cfg(feature = "whatlang")]
-pub use whatlang::WhatLangDetector;
-pub use youdao::YoudaoTranslator;
+pub use aio_translator_whatlang::WhatLangDetector;
+pub use aio_translator_youdao::YoudaoTranslator;
+pub use ct2rs::ComputeType;
+pub use style_transfer::StyleTransfer;
 
 #[cfg(test)]
 mod tests {

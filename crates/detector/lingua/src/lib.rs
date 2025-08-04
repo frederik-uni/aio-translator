@@ -1,9 +1,10 @@
-use interface::{Detector, Language as InterfaceLanguage};
+use aio_translator_interface::{Detector, Language as InterfaceLanguage};
 use lingua_rs::{Language, LanguageDetector, LanguageDetectorBuilder};
 
 pub struct LinguaDetector {
     d: LanguageDetector,
 }
+
 impl LinguaDetector {
     pub fn new() -> Self {
         let d = LanguageDetectorBuilder::from_all_languages().build();

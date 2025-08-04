@@ -1,11 +1,11 @@
 [package]
-name = "qwen2"
+name = "aio-translator-qwen2"
 edition.workspace = true
 version.workspace = true
 
 [dependencies]
 ct2rs = { workspace = true, default-features = false }
-interface.workspace = true
+aio-translator-interface.workspace = true
 interface-model = { workspace = true, default-features = false }
 base-util = { workspace = true, default-features = false }
 maplit.workspace = true

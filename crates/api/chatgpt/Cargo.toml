@@ -1,6 +1,7 @@
 [package]
-name = "chatgpt"
+name = "aio-translator-chatgpt"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]

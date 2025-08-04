@@ -1,11 +1,11 @@
 [package]
-name = "mbart50"
+name = "aio-translator-mbart50"
 edition.workspace = true
 version.workspace = true
-
+publish = false
 
 [dependencies]
-interface.workspace = true
+aio-translator-interface.workspace = true
 ct2rs = { workspace = true, default-features = false, features = [
     "os-defaults",
 ] }

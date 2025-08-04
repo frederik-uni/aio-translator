@@ -1,12 +1,13 @@
 [package]
-name = "caiyun"
+name = "aio-translator-caiyun"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 reqwest = { workspace = true, features = ["json"] }
 serde = { workspace = true, features = ["derive"] }
-interface = { workspace = true }
+aio-translator-interface = { workspace = true }
 async-trait.workspace = true
 
 [dev-dependencies]

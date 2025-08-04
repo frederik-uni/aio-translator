@@ -4,23 +4,23 @@ edition.workspace = true
 version.workspace = true
 
 [dependencies]
-none.workspace = true
-original.workspace = true
-jparacrawl.workspace = true
-m2m100.workspace = true
-nllb.workspace = true
-sugoi.workspace = true
-interface.workspace = true
-lingua = { workspace = true, optional = true }
-whatlang = { workspace = true, optional = true }
-langid.workspace = true
-deepl.workspace = true
-papago.workspace = true
-mymemory.workspace = true
-google.workspace = true
-caiyun.workspace = true
-baidu.workspace = true
-youdao.workspace = true
+aio-translator-none.workspace = true
+aio-translator-original.workspace = true
+aio-translator-jparacrawl.workspace = true
+aio-translator-m2m100.workspace = true
+aio-translator-nllb.workspace = true
+aio-translator-sugoi.workspace = true
+aio-translator-interface.workspace = true
+aio-translator-lingua = { workspace = true, optional = true }
+aio-translator-whatlang = { workspace = true, optional = true }
+aio-translator-langid.workspace = true
+aio-translator-deepl.workspace = true
+aio-translator-papago.workspace = true
+aio-translator-mymemory.workspace = true
+aio-translator-google.workspace = true
+aio-translator-caiyun.workspace = true
+aio-translator-baidu.workspace = true
+aio-translator-youdao.workspace = true
 fancy-regex.workspace = true
 arabic_reshaper.workspace = true
 unicode-general-category = "1.0.0"
@@ -28,5 +28,5 @@ async-trait.workspace = true
 ct2rs = { workspace = true, default-features = false }
 
 [features]
-lingua = ["dep:lingua"]
-whatlang = ["dep:whatlang"]
+lingua = ["dep:aio-translator-lingua"]
+whatlang = ["dep:aio-translator-whatlang"]

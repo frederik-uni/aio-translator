@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 
-use anyhow::bail;
-use interface::{
+use aio_translator_interface::{
     AsyncTranslator, Language, TranslationListOutput, TranslationOutput, Translator,
-    TranslatorTrait, error::Error, prompt::PromptBuilder,
+    TranslatorMutTrait, TranslatorTrait, error::Error, prompt::PromptBuilder,
 };
+
+use anyhow::bail;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -42,12 +43,12 @@ impl Translator for DeeplTranslator {
         false
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Async(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Async(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Async(self)
     }
 }
 #[async_trait::async_trait]
@@ -146,7 +147,7 @@ struct Root1 {
 
 #[cfg(test)]
 mod tests {
-    use interface::{Language, Translator as _};
+    use aio_translator_interface::{Language, Translator as _};
 
     use crate::{DeeplTranslator, get_languages};
 

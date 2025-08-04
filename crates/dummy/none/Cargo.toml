@@ -1,8 +1,9 @@
 [package]
-name = "none"
+name = "aio-translator-none"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
-interface.workspace = true
+aio-translator-interface.workspace = true
 reqwest.workspace = true

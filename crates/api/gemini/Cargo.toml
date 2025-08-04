@@ -1,6 +1,7 @@
 [package]
-name = "gemini"
+name = "aio-translator-gemini"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]

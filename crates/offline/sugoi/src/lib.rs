@@ -1,8 +1,10 @@
-use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
-use interface::{
-    BlockingTranslator, Language, Model, Translator, TranslatorTrait, error::Error,
-    prompt::PromptBuilder, tokenizer::SentenceTokenizer,
+use aio_translator_interface::{
+    BlockingTranslator, Language, Model, Translator, TranslatorMutTrait, TranslatorTrait,
+    error::{self, Error},
+    prompt::PromptBuilder,
+    tokenizer::SentenceTokenizer,
 };
+use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
 use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
@@ -99,12 +101,12 @@ impl Translator for SugoiTranslator {
         true
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Blocking(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Blocking(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Blocking(self)
     }
 }
 
@@ -113,9 +115,9 @@ impl BlockingTranslator for SugoiTranslator {
         &mut self,
         query: &str,
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<String, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<String, error::Error> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -124,15 +126,12 @@ impl BlockingTranslator for SugoiTranslator {
         &mut self,
         query: &[String],
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<Vec<String>, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<Vec<String>, error::Error> {
         if let (Language::Japanese, Language::English) = (from, to) {
         } else {
-            return Err(interface::error::Error::UnknownLanguageGroup(
-                from,
-                to.clone(),
-            ));
+            return Err(error::Error::UnknownLanguageGroup(from, to.clone()));
         };
 
         let (query, query_split_sizes) = self.pre_tokenize(query)?;

@@ -1,6 +1,7 @@
 [package]
-name = "groq"
+name = "aio-translator-groq"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]

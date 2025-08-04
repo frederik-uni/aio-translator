@@ -1,10 +1,12 @@
 use std::{collections::HashMap, path::PathBuf};
 
-use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
-use interface::{
-    BlockingTranslator, Language, Model, Translator, TranslatorTrait, error::Error,
-    prompt::PromptBuilder, tokenizer::SentenceTokenizer,
+use aio_translator_interface::{
+    BlockingTranslator, Language, Model, Translator, TranslatorMutTrait, TranslatorTrait,
+    error::{self, Error},
+    prompt::PromptBuilder,
+    tokenizer::SentenceTokenizer,
 };
+use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
 use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
@@ -76,12 +78,12 @@ impl Translator for JParaCrawlTranslator {
         true
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Blocking(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Blocking(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Blocking(self)
     }
 }
 
@@ -90,9 +92,9 @@ impl BlockingTranslator for JParaCrawlTranslator {
         &mut self,
         query: &str,
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<String, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<String, error::Error> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -101,17 +103,14 @@ impl BlockingTranslator for JParaCrawlTranslator {
         &mut self,
         query: &[String],
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<Vec<String>, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<Vec<String>, error::Error> {
         let eng_src = match (from, to) {
             (Language::English, Language::Japanese) => true,
             (Language::Japanese, Language::English) => false,
             _ => {
-                return Err(interface::error::Error::UnknownLanguageGroup(
-                    from,
-                    to.clone(),
-                ));
+                return Err(error::Error::UnknownLanguageGroup(from, to.clone()));
             }
         };
         self.load()?;
@@ -156,7 +155,7 @@ impl BlockingTranslator for JParaCrawlTranslator {
 }
 
 impl JParaCrawlTranslator {
-    fn custom_load(&mut self, name: &str, en_ja: bool) -> Result<(), interface::error::Error> {
+    fn custom_load(&mut self, name: &str, en_ja: bool) -> Result<(), error::Error> {
         if self.loaded_models.contains_key(name) {
             return Ok(());
         }

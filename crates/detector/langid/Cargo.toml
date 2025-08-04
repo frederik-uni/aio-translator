@@ -1,8 +1,9 @@
 [package]
-name = "langid"
+name = "aio-translator-langid"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 langid-rs.workspace = true
-interface.workspace = true
+aio-translator-interface.workspace = true

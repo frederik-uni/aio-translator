@@ -1,4 +1,4 @@
-use interface::{Detector, Language};
+use aio_translator_interface::{Detector, Language};
 
 pub struct WhatLangDetector {}
 impl WhatLangDetector {
@@ -6,6 +6,7 @@ impl WhatLangDetector {
         Self {}
     }
 }
+
 impl Detector for WhatLangDetector {
     fn detect_language(&self, s: &str) -> Option<Language> {
         Some(match whatlang_rs::detect_lang(s)? {

@@ -1,4 +1,4 @@
-use interface::{
+use aio_translator_interface::{
     BlockingTranslator, Language, Translator, TranslatorMutTrait, TranslatorTrait, error::Error,
     prompt::PromptBuilder,
 };
@@ -16,11 +16,11 @@ impl Translator for OriginalTranslator {
         false
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Blocking(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
         TranslatorMutTrait::Blocking(self)
     }
 }

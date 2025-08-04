@@ -1,10 +1,11 @@
 [package]
-name = "deepl"
+name = "aio-translator-deepl"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
-interface.workspace = true
+aio-translator-interface.workspace = true
 reqwest = { workspace = true, features = ["json"] }
 anyhow.workspace = true
 serde = { workspace = true, features = ["derive"] }

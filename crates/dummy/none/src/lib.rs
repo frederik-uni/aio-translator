@@ -1,5 +1,6 @@
-use interface::{
-    BlockingTranslator, Language, Translator, TranslatorTrait, error::Error, prompt::PromptBuilder,
+use aio_translator_interface::{
+    BlockingTranslator, Language, Translator, TranslatorMutTrait, TranslatorTrait, error::Error,
+    prompt::PromptBuilder,
 };
 
 pub struct NoneTranslator {}
@@ -15,12 +16,12 @@ impl Translator for NoneTranslator {
         false
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Blocking(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Blocking(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Blocking(self)
     }
 }
 

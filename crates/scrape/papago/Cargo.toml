@@ -1,7 +1,8 @@
 [package]
-name = "papago"
+name = "aio-translator-papago"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 base64.workspace = true
@@ -10,7 +11,7 @@ md-5.workspace = true
 regex.workspace = true
 reqwest = { workspace = true, features = ["json"] }
 serde = { workspace = true, features = ["derive"] }
-interface.workspace = true
+aio-translator-interface.workspace = true
 uuid = { workspace = true, features = ["v4"] }
 async-trait.workspace = true
 

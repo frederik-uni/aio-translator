@@ -1,8 +1,9 @@
 [package]
-name = "lingua"
+name = "aio-translator-lingua"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 lingua-rs = { workspace = true }
-interface.workspace = true
+aio-translator-interface.workspace = true

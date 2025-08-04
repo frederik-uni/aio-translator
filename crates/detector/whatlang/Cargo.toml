@@ -1,8 +1,9 @@
 [package]
-name = "whatlang"
+name = "aio-translator-whatlang"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 whatlang-rs.workspace = true
-interface.workspace = true
+aio-translator-interface.workspace = true

@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use interface::{Detector, Language};
+use aio_translator_interface::{Detector, Language};
 
 #[derive(Clone)]
 pub struct LangIdDetector {

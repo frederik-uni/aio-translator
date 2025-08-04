@@ -1,23 +1,23 @@
 use std::sync::{Arc, Mutex};
 
-use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
-use interface::{
-    BlockingTranslator, Model, Translator, TranslatorTrait, error::Error, prompt::PromptBuilder,
+use aio_translator_interface::{
+    BlockingTranslator, Language, Model, Translator, TranslatorMutTrait, TranslatorTrait,
+    error::{self, Error},
+    prompt::PromptBuilder,
+    tokenizer::SentenceTokenizer,
 };
+use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
 use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
 
 pub struct MyTokenizer {
-    tokenizer: interface::tokenizer::SentenceTokenizer,
+    tokenizer: SentenceTokenizer,
     from: Arc<Mutex<String>>,
 }
 
 impl MyTokenizer {
-    pub fn new(
-        tokenizer: interface::tokenizer::SentenceTokenizer,
-        from: Arc<Mutex<String>>,
-    ) -> Self {
+    pub fn new(tokenizer: SentenceTokenizer, from: Arc<Mutex<String>>) -> Self {
         Self { tokenizer, from }
     }
 }
@@ -65,12 +65,12 @@ impl Translator for M2M100Translator {
         true
     }
 
-    fn translator<'a>(&'a self) -> interface::TranslatorTrait<'a> {
+    fn translator<'a>(&'a self) -> TranslatorTrait<'a> {
         TranslatorTrait::Blocking(self)
     }
 
-    fn translator_mut<'a>(&'a mut self) -> interface::TranslatorMutTrait<'a> {
-        interface::TranslatorMutTrait::Blocking(self)
+    fn translator_mut<'a>(&'a mut self) -> TranslatorMutTrait<'a> {
+        TranslatorMutTrait::Blocking(self)
     }
 }
 
@@ -79,9 +79,9 @@ impl BlockingTranslator for M2M100Translator {
         &mut self,
         query: &str,
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<String, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<String, error::Error> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -90,9 +90,9 @@ impl BlockingTranslator for M2M100Translator {
         &mut self,
         query: &[String],
         _: Option<PromptBuilder>,
-        from: interface::Language,
-        to: &interface::Language,
-    ) -> Result<Vec<String>, interface::error::Error> {
+        from: Language,
+        to: &Language,
+    ) -> Result<Vec<String>, error::Error> {
         let from = from.to_m2m100().ok_or(Error::UnknownLanguage(from))?;
         let to = to.to_m2m100().ok_or(Error::UnknownLanguage(to.clone()))?;
         *self.from.lock().unwrap() = from.to_owned();
@@ -136,7 +136,7 @@ impl ModelLoad for M2M100Translator {
         let model = self.download_model(model_name, &format!("{}/model.bin", model_name))?;
         let path = self.download_model("spm", "sentencepiece.bpe.model")?;
         let from = Arc::new(Mutex::new("".to_string()));
-        let tokenizer = MyTokenizer::new(interface::tokenizer::SentenceTokenizer::new(path), from);
+        let tokenizer = MyTokenizer::new(SentenceTokenizer::new(path), from);
         let model = model.parent().map(|v| v.to_path_buf()).unwrap_or(model);
         let v = ct2rs::Translator::with_tokenizer(
             model,
@@ -185,8 +185,8 @@ impl Model for M2M100Translator {
 
 #[cfg(test)]
 mod tests {
+    use aio_translator_interface::Language;
     use env_logger::Env;
-    use interface::Language;
 
     use super::*;
 

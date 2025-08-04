@@ -1,13 +1,14 @@
 [package]
-name = "interface"
+name = "aio-translator-interface"
 edition.workspace = true
 version.workspace = true
+publish = false
 
 [dependencies]
 reqwest.workspace = true
 anyhow.workspace = true
 async-trait.workspace = true
-lang-generator.workspace = true
+aio-translator-lang-generator.workspace = true
 thiserror.workspace = true
 interface-model = { workspace = true, default-features = false }
 rust_tokenizers.workspace = true

@@ -45,28 +45,294 @@ dependencies = [
 name = "aio-translator"
 version = "1.0.0"
 dependencies = [
+ "aio-translator-baidu",
+ "aio-translator-caiyun",
+ "aio-translator-deepl",
+ "aio-translator-google",
+ "aio-translator-interface",
+ "aio-translator-jparacrawl",
+ "aio-translator-langid",
+ "aio-translator-lingua",
+ "aio-translator-m2m100",
+ "aio-translator-mymemory",
+ "aio-translator-nllb",
+ "aio-translator-none",
+ "aio-translator-original",
+ "aio-translator-papago",
+ "aio-translator-sugoi",
+ "aio-translator-whatlang",
+ "aio-translator-youdao",
  "arabic_reshaper",
  "async-trait",
- "baidu",
- "caiyun",
  "ct2rs",
- "deepl",
  "fancy-regex",
- "google",
- "interface",
- "jparacrawl",
- "langid",
- "lingua 1.0.0",
- "m2m100",
- "mymemory",
- "nllb",
- "none",
- "original",
- "papago",
- "sugoi",
  "unicode-general-category",
- "whatlang 1.0.0",
- "youdao",
+]
+
+[[package]]
+name = "aio-translator-baidu"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "iso-639",
+ "md5",
+ "reqwest",
+ "rust_iso639",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "aio-translator-caiyun"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "tokio",
+]
+
+[[package]]
+name = "aio-translator-chatgpt"
+version = "1.0.0"
+
+[[package]]
+name = "aio-translator-deepl"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "async-trait",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "aio-translator-deepseek"
+version = "1.0.0"
+
+[[package]]
+name = "aio-translator-gemini"
+version = "1.0.0"
+
+[[package]]
+name = "aio-translator-google"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "dotenv",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "aio-translator-groq"
+version = "1.0.0"
+
+[[package]]
+name = "aio-translator-interface"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-lang-generator",
+ "anyhow",
+ "async-trait",
+ "ct2rs",
+ "interface-model",
+ "reqwest",
+ "rust_tokenizers",
+ "thiserror 2.0.12",
+]
+
+[[package]]
+name = "aio-translator-jparacrawl"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "log",
+ "maplit",
+]
+
+[[package]]
+name = "aio-translator-lang-generator"
+version = "1.0.0"
+dependencies = [
+ "csv",
+ "heck",
+ "iso-639",
+ "proc-macro2",
+ "quote",
+ "reqwest",
+ "rust_iso639",
+ "serde",
+ "serde_json",
+ "syn",
+]
+
+[[package]]
+name = "aio-translator-langid"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "langid-rs",
+]
+
+[[package]]
+name = "aio-translator-lingua"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "lingua",
+]
+
+[[package]]
+name = "aio-translator-m2m100"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "maplit",
+]
+
+[[package]]
+name = "aio-translator-mbart50"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "maplit",
+]
+
+[[package]]
+name = "aio-translator-mymemory"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "dotenv",
+ "reqwest",
+ "scraper",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "aio-translator-nllb"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "maplit",
+]
+
+[[package]]
+name = "aio-translator-none"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "reqwest",
+]
+
+[[package]]
+name = "aio-translator-original"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "reqwest",
+]
+
+[[package]]
+name = "aio-translator-papago"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "base64 0.22.1",
+ "hmac",
+ "md-5",
+ "regex",
+ "reqwest",
+ "serde",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
+name = "aio-translator-qwen2"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "maplit",
+ "tokenizers",
+]
+
+[[package]]
+name = "aio-translator-sugoi"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "anyhow",
+ "base-util",
+ "ct2rs",
+ "env_logger",
+ "interface-model",
+ "maplit",
+ "regex",
+]
+
+[[package]]
+name = "aio-translator-whatlang"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "whatlang",
+]
+
+[[package]]
+name = "aio-translator-youdao"
+version = "1.0.0"
+dependencies = [
+ "aio-translator-interface",
+ "async-trait",
+ "dotenv",
+ "hex",
+ "rand 0.9.2",
+ "reqwest",
+ "serde",
+ "sha2",
+ "tokio",
+ "uuid",
 ]
 
 [[package]]
@@ -200,21 +466,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "baidu"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "interface",
- "iso-639",
- "md5",
- "reqwest",
- "rust_iso639",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
 name = "base-util"
 version = "0.7.0"
 source = "git+https://github.com/frederik-uni/manga-image-translator-rust?branch=master#041859e5cca00164b4c7666607ab88fc20aee2ab"
@@ -319,18 +570,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
-name = "caiyun"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "dotenv",
- "interface",
- "reqwest",
- "serde",
- "tokio",
-]
-
-[[package]]
 name = "castaway"
 version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -353,10 +592,6 @@ name = "cfg-if"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268"
-
-[[package]]
-name = "chatgpt"
-version = "1.0.0"
 
 [[package]]
 name = "clap"
@@ -726,24 +961,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "deepl"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "dotenv",
- "interface",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "deepseek"
-version = "1.0.0"
-
-[[package]]
 name = "der"
 version = "0.7.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1089,10 +1306,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "gemini"
-version = "1.0.0"
-
-[[package]]
 name = "generic-array"
 version = "0.14.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1139,23 +1352,6 @@ name = "gimli"
 version = "0.31.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "07e28edb80900c19c28f1072f2e8aeca7fa06b23cd4169cefe1af5aa3260783f"
-
-[[package]]
-name = "google"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "dotenv",
- "interface",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "groq"
-version = "1.0.0"
 
 [[package]]
 name = "h2"
@@ -1518,20 +1714,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "interface"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "ct2rs",
- "interface-model",
- "lang-generator",
- "reqwest",
- "rust_tokenizers",
- "thiserror 2.0.12",
-]
-
-[[package]]
 name = "interface-model"
 version = "0.7.0"
 source = "git+https://github.com/frederik-uni/manga-image-translator-rust?branch=master#041859e5cca00164b4c7666607ab88fc20aee2ab"
@@ -1646,20 +1828,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "jparacrawl"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "log",
- "maplit",
-]
-
-[[package]]
 name = "js-sys"
 version = "0.3.77"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1667,30 +1835,6 @@ checksum = "1cfaf33c695fc6e08064efbc1f72ec937429614f25eef83af942d0e227c3a28f"
 dependencies = [
  "once_cell",
  "wasm-bindgen",
-]
-
-[[package]]
-name = "lang-generator"
-version = "1.0.0"
-dependencies = [
- "csv",
- "heck",
- "iso-639",
- "proc-macro2",
- "quote",
- "reqwest",
- "rust_iso639",
- "serde",
- "serde_json",
- "syn",
-]
-
-[[package]]
-name = "langid"
-version = "1.0.0"
-dependencies = [
- "interface",
- "langid-rs",
 ]
 
 [[package]]
@@ -1720,14 +1864,6 @@ dependencies = [
  "bitflags",
  "libc",
  "redox_syscall",
-]
-
-[[package]]
-name = "lingua"
-version = "1.0.0"
-dependencies = [
- "interface",
- "lingua 1.7.2",
 ]
 
 [[package]]
@@ -2542,19 +2678,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13dc2df351e3202783a1fe0d44375f7295ffb4049267b0f3018346dc122a1d94"
 
 [[package]]
-name = "m2m100"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "maplit",
-]
-
-[[package]]
 name = "mac"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2615,19 +2738,6 @@ checksum = "a06de3016e9fae57a36fd14dba131fccf49f74b40b7fbdb472f96e361ec71a08"
 dependencies = [
  "autocfg",
  "rawpointer",
-]
-
-[[package]]
-name = "mbart50"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "maplit",
 ]
 
 [[package]]
@@ -2706,19 +2816,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "mymemory"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "dotenv",
- "interface",
- "reqwest",
- "scraper",
- "serde_json",
- "tokio",
-]
-
-[[package]]
 name = "native-tls"
 version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2757,19 +2854,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
 
 [[package]]
-name = "nllb"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "maplit",
-]
-
-[[package]]
 name = "nom"
 version = "7.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2777,14 +2861,6 @@ checksum = "d273983c5a657a70a3e8f2a01329822f3b8c8172b73826411a55751e404a0a4a"
 dependencies = [
  "memchr",
  "minimal-lexical",
-]
-
-[[package]]
-name = "none"
-version = "1.0.0"
-dependencies = [
- "interface",
- "reqwest",
 ]
 
 [[package]]
@@ -2954,14 +3030,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "original"
-version = "1.0.0"
-dependencies = [
- "interface",
- "reqwest",
-]
-
-[[package]]
 name = "ort"
 version = "2.0.0-rc.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2984,22 +3052,6 @@ dependencies = [
  "sha2",
  "tar",
  "ureq",
-]
-
-[[package]]
-name = "papago"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "base64 0.22.1",
- "hmac",
- "interface",
- "md-5",
- "regex",
- "reqwest",
- "serde",
- "tokio",
- "uuid",
 ]
 
 [[package]]
@@ -3191,20 +3243,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1885c039570dc00dcb4ff087a89e185fd56bae234ddc7f056a945bf36467248d"
 dependencies = [
  "proc-macro2",
-]
-
-[[package]]
-name = "qwen2"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "maplit",
- "tokenizers",
 ]
 
 [[package]]
@@ -3806,20 +3844,6 @@ name = "subtle"
 version = "2.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
-
-[[package]]
-name = "sugoi"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "base-util",
- "ct2rs",
- "env_logger",
- "interface",
- "interface-model",
- "maplit",
- "regex",
-]
 
 [[package]]
 name = "syn"
@@ -4501,14 +4525,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "whatlang"
-version = "1.0.0"
-dependencies = [
- "interface",
- "whatlang 0.16.4",
-]
-
-[[package]]
 name = "winapi"
 version = "0.3.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4777,22 +4793,6 @@ dependencies = [
  "quote",
  "syn",
  "synstructure",
-]
-
-[[package]]
-name = "youdao"
-version = "1.0.0"
-dependencies = [
- "async-trait",
- "dotenv",
- "hex",
- "interface",
- "rand 0.9.2",
- "reqwest",
- "serde",
- "sha2",
- "tokio",
- "uuid",
 ]
 
 [[package]]
