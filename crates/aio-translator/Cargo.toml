@@ -25,7 +25,7 @@ fancy-regex.workspace = true
 arabic_reshaper.workspace = true
 unicode-general-category = "1.0.0"
 async-trait.workspace = true
-ct2rs = { workspace = true, default-features = false }
+ct2rs = { workspace = true, default-features = false, features = ["vendored"] }
 
 [features]
 lingua = ["dep:aio-translator-lingua"]

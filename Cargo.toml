@@ -63,7 +63,7 @@ md5 = "0.8.0"
 thiserror = "2.0.12"
 async-trait = "0.1.88"
 zip = "4.3.0"
-ct2rs = { git = "https://github.com/frederik-uni/ctranslate2-rs", default-features = false }
+ct2rs = { git = "https://github.com/frederik-uni/ctranslate2-rs", default-features = false, branch = "vendor" }
 maplit = "1.0.2"
 bytemuck = "1.23.1"
 env_logger = "0.11.8"

@@ -828,7 +828,7 @@ dependencies = [
 [[package]]
 name = "ct2rs"
 version = "0.9.7"
-source = "git+https://github.com/frederik-uni/ctranslate2-rs#e282fb347ec5cb9653cd94542a9a65815718840d"
+source = "git+https://github.com/frederik-uni/ctranslate2-rs?branch=vendor#dcb34c451c408e372b8a232ece4ba8f001e83188"
 dependencies = [
  "anyhow",
  "cmake",

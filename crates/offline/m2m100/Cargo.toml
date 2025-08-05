@@ -6,9 +6,7 @@ publish = false
 
 [dependencies]
 aio-translator-interface.workspace = true
-ct2rs = { workspace = true, default-features = false, features = [
-    "os-defaults",
-] }
+ct2rs = { workspace = true, default-features = false }
 interface-model = { workspace = true, default-features = false }
 base-util = { workspace = true, default-features = false }
 maplit.workspace = true
