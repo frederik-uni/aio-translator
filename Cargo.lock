@@ -54,6 +54,7 @@ dependencies = [
  "aio-translator-langid",
  "aio-translator-lingua",
  "aio-translator-m2m100",
+ "aio-translator-mbart50",
  "aio-translator-mymemory",
  "aio-translator-nllb",
  "aio-translator-none",

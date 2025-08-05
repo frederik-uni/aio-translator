@@ -20,6 +20,7 @@ aio-translator-mymemory.workspace = true
 aio-translator-google.workspace = true
 aio-translator-caiyun.workspace = true
 aio-translator-baidu.workspace = true
+aio-translator-mbart50.workspace = true
 aio-translator-youdao.workspace = true
 fancy-regex.workspace = true
 arabic_reshaper.workspace = true

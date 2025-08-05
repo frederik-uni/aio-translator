@@ -34,17 +34,17 @@ impl Tokenizer for MyTokenizer {
     }
 }
 
-pub struct NLLBTranslator {
+pub struct MBart50Translator {
     loaded_models: Option<ct2rs::Translator<MyTokenizer>>,
     cuda: bool,
     compute_type: ComputeType,
     from: Arc<Mutex<String>>,
 }
 
-impl NLLBTranslator {
+impl MBart50Translator {
     /// single_loaded will only allow one model to be loaded at a time.
     pub fn new(cuda: bool, compute_type: ComputeType) -> Self {
-        NLLBTranslator {
+        MBart50Translator {
             compute_type,
             cuda,
             loaded_models: None,
@@ -53,7 +53,7 @@ impl NLLBTranslator {
     }
 }
 
-impl Translator for NLLBTranslator {
+impl Translator for MBart50Translator {
     fn local(&self) -> bool {
         true
     }
@@ -66,7 +66,7 @@ impl Translator for NLLBTranslator {
     }
 }
 
-impl BlockingTranslator for NLLBTranslator {
+impl BlockingTranslator for MBart50Translator {
     fn translate(
         &mut self,
         query: &str,
@@ -109,7 +109,7 @@ impl BlockingTranslator for NLLBTranslator {
     }
 }
 
-impl ModelLoad for NLLBTranslator {
+impl ModelLoad for MBart50Translator {
     type T = ct2rs::Translator<MyTokenizer>;
 
     fn loaded(&self) -> bool {
@@ -146,7 +146,7 @@ impl ModelLoad for NLLBTranslator {
     }
 }
 
-impl Model for NLLBTranslator {
+impl Model for MBart50Translator {
     impl_model_load_helpers!("translator", "mbart50");
 
     fn models(&self) -> std::collections::HashMap<&'static str, interface_model::ModelSource> {
@@ -191,7 +191,7 @@ mod tests {
     }
     #[test]
     fn test_load() {
-        let mut nllb = NLLBTranslator::new(false, ComputeType::DEFAULT);
+        let mut nllb = MBart50Translator::new(false, ComputeType::DEFAULT);
         assert!(nllb.load().is_ok());
         assert!(nllb.loaded());
     }
@@ -199,7 +199,7 @@ mod tests {
     #[test]
     fn test_translate() {
         env_logger::Builder::from_env(Env::default().default_filter_or("debug")).init();
-        let mut nllb = NLLBTranslator::new(false, ComputeType::DEFAULT);
+        let mut nllb = MBart50Translator::new(false, ComputeType::DEFAULT);
         let input_ja = vec![
             "明日は雨が降るかもしれません。".to_string(),
             "彼はその問題について深く考えている。".to_string(),

@@ -11,12 +11,16 @@ pub use aio_translator_caiyun::CaiyunTranslator;
 pub use aio_translator_deepl::DeeplTranslator;
 pub use aio_translator_google::GoogleTranslator;
 pub use aio_translator_jparacrawl::JParaCrawlTranslator;
+pub use aio_translator_jparacrawl::Size as JParaCrawlSize;
 pub use aio_translator_langid::LangIdDetector;
 #[cfg(feature = "lingua")]
 pub use aio_translator_lingua::LinguaDetector;
 pub use aio_translator_m2m100::M2M100Translator;
+pub use aio_translator_m2m100::Size as M2M100Size;
+pub use aio_translator_mbart50::MBart50Translator;
 pub use aio_translator_mymemory::MyMemoryTranslator;
 pub use aio_translator_nllb::NLLBTranslator;
+pub use aio_translator_nllb::Size as NLLBSize;
 pub use aio_translator_none::NoneTranslator;
 pub use aio_translator_original::OriginalTranslator;
 pub use aio_translator_papago::PapagoTranslator;
