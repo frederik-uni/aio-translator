@@ -30,6 +30,7 @@ pub use aio_translator_whatlang::WhatLangDetector;
 pub use aio_translator_youdao::YoudaoTranslator;
 pub use ct2rs::ComputeType;
 pub use style_transfer::StyleTransfer;
+pub use style_transfer::is_valuable_text;
 
 #[cfg(test)]
 mod tests {

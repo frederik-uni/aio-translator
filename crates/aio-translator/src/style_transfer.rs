@@ -242,7 +242,7 @@ fn is_control(ch: char) -> bool {
     )
 }
 
-fn is_valuable_text(text: &str) -> bool {
+pub fn is_valuable_text(text: &str) -> bool {
     text.chars().any(|v| is_valuable_char(v))
 }
 
