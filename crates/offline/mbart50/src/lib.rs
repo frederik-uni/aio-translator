@@ -8,7 +8,7 @@ use aio_translator_interface::{
 };
 use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
-use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
+use interface_model::{ModelLoad, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
 
 pub struct MyTokenizer {
@@ -88,7 +88,7 @@ impl BlockingTranslator for MBart50Translator {
         let from = from.to_mbart_50().ok_or(Error::UnknownLanguage(from))?;
         let to = to.to_mbart_50().ok_or(Error::UnknownLanguage(to.clone()))?;
         *self.from.lock().unwrap() = from.to_owned();
-        let model = self.load()?;
+        let model = self.load().map_err(error::Error::ModelLoadError)?;
         let trans = model
             .translate_batch_with_target_prefix(
                 query,
@@ -120,7 +120,7 @@ impl ModelLoad for MBart50Translator {
         self.loaded_models.as_mut()
     }
 
-    fn reload(&mut self) -> Result<&mut Self::T, ModelLoadError> {
+    fn reload(&mut self) -> anyhow::Result<&mut Self::T> {
         let model =
             self.download_model("large-many-to-many-mmt", "large-many-to-many-mmt/model.bin")?;
         let path = self.download_model("spm", "sentencepiece.bpe.model")?;

@@ -8,7 +8,7 @@ use aio_translator_interface::{
 };
 use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
-use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
+use interface_model::{ModelLoad, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
 
 pub struct MyTokenizer {
@@ -98,7 +98,7 @@ impl BlockingTranslator for NLLBTranslator {
         let to = to.to_nllb().ok_or(Error::UnknownLanguage(to.clone()))?;
         *self.from.lock().unwrap() = from.to_owned();
 
-        let model = self.load()?;
+        let model = self.load().map_err(error::Error::ModelLoadError)?;
 
         let trans = model
             .translate_batch_with_target_prefix(
@@ -131,7 +131,7 @@ impl ModelLoad for NLLBTranslator {
         self.loaded_models.as_mut()
     }
 
-    fn reload(&mut self) -> Result<&mut Self::T, ModelLoadError> {
+    fn reload(&mut self) -> anyhow::Result<&mut Self::T> {
         let model_name = match self.size {
             Size::SmallDistilled => "600M-distilled",
             Size::Large => "3.3B",

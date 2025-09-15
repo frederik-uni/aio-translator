@@ -13,7 +13,7 @@ pub enum Error {
     #[error("CTranslator")]
     CTranslator(anyhow::Error),
     #[error("Model load error")]
-    ModelLoadError(#[from] interface_model::ModelLoadError),
+    ModelLoadError(anyhow::Error),
     #[error("failed to convert string to language")]
     CouldNotMapLanguage(Option<String>),
     #[error("api did not return a response")]

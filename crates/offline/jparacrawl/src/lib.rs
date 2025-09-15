@@ -8,7 +8,7 @@ use aio_translator_interface::{
 };
 use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
-use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
+use interface_model::{ModelLoad, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
 
 pub struct JParaCrawlTranslator {
@@ -32,7 +32,7 @@ pub struct MyTokenizer {
 }
 
 impl MyTokenizer {
-    fn new(en_ja: bool, ja_path: PathBuf, en_path: PathBuf) -> Result<Self, ModelLoadError> {
+    fn new(en_ja: bool, ja_path: PathBuf, en_path: PathBuf) -> anyhow::Result<Self> {
         let tokenizer_ja = SentenceTokenizer::new(ja_path);
         let tokenizer_en = SentenceTokenizer::new(en_path);
         Ok(MyTokenizer {
@@ -113,7 +113,7 @@ impl BlockingTranslator for JParaCrawlTranslator {
                 return Err(error::Error::UnknownLanguageGroup(from, to.clone()));
             }
         };
-        self.load()?;
+        self.load().map_err(error::Error::ModelLoadError)?;
 
         let (from, to) = match eng_src {
             true => ("en", "ja"),
@@ -159,12 +159,18 @@ impl JParaCrawlTranslator {
         if self.loaded_models.contains_key(name) {
             return Ok(());
         }
-        let model = self.download_model(name, &format!("{}/model.bin", name))?;
-        let ja_path = self.download_model("spm.nopretok", "spm.nopretok/spm.ja.nopretok.model")?;
-        let en_path = self.download_model("spm.nopretok", "spm.nopretok/spm.en.nopretok.model")?;
+        let model = self
+            .download_model(name, &format!("{}/model.bin", name))
+            .map_err(error::Error::ModelLoadError)?;
+        let ja_path = self
+            .download_model("spm.nopretok", "spm.nopretok/spm.ja.nopretok.model")
+            .map_err(error::Error::ModelLoadError)?;
+        let en_path = self
+            .download_model("spm.nopretok", "spm.nopretok/spm.en.nopretok.model")
+            .map_err(error::Error::ModelLoadError)?;
 
         let model = model.parent().map(|v| v.to_path_buf()).unwrap_or(model);
-        let my = MyTokenizer::new(en_ja, ja_path, en_path)?;
+        let my = MyTokenizer::new(en_ja, ja_path, en_path).map_err(error::Error::ModelLoadError)?;
 
         let v = ct2rs::Translator::with_tokenizer(
             model,
@@ -239,7 +245,7 @@ impl ModelLoad for JParaCrawlTranslator {
         Some(&mut self.loaded_models)
     }
 
-    fn reload(&mut self) -> Result<&mut Self::T, ModelLoadError> {
+    fn reload(&mut self) -> anyhow::Result<&mut Self::T> {
         Ok(&mut self.loaded_models)
     }
 }

@@ -6,7 +6,7 @@ use aio_translator_interface::{
 };
 use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
-use interface_model::{ModelLoad, ModelLoadError, ModelSource, impl_model_load_helpers};
+use interface_model::{ModelLoad, ModelSource, impl_model_load_helpers};
 use maplit::hashmap;
 use regex::Regex;
 
@@ -135,7 +135,7 @@ impl BlockingTranslator for SugoiTranslator {
         };
 
         let (query, query_split_sizes) = self.pre_tokenize(query)?;
-        let model = self.load()?;
+        let model = self.load().map_err(error::Error::ModelLoadError)?;
         let trans = model
             .translate_batch(
                 &query,
@@ -182,7 +182,7 @@ impl ModelLoad for SugoiTranslator {
         self.loaded_models.as_mut()
     }
 
-    fn reload(&mut self) -> Result<&mut Self::T, ModelLoadError> {
+    fn reload(&mut self) -> anyhow::Result<&mut Self::T> {
         let ja_path = self.download_model("spm.ja.nopretok", "spm.ja.nopretok.model")?;
         let en_path = self.download_model("spm.en.nopretok", "spm.en.nopretok.model")?;
 
