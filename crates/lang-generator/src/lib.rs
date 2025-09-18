@@ -28,21 +28,30 @@ pub fn generate_language(_: TokenStream) -> TokenStream {
 
     let csv = read_csv().unwrap();
     let mut from_tos: HashMap<String, Vec<(Ident, Option<String>)>> = HashMap::new();
-    let variant_idents = csv.into_iter().map(|map| {
-        let name = map.get("name").as_ref().unwrap().as_ref().unwrap();
-        let enum_name = format_ident!("{}", to_camel_case(name));
-        for (key, item) in map {
-            from_tos
-                .entry(key.to_owned())
-                .or_default()
-                .push((enum_name.clone(), item));
-        }
-        enum_name
-    });
+    let variant_idents = csv
+        .into_iter()
+        .map(|map| {
+            let name = map.get("name").as_ref().unwrap().as_ref().unwrap();
+            let enum_name = format_ident!("{}", to_camel_case(name));
+            for (key, item) in map {
+                from_tos
+                    .entry(key.to_owned())
+                    .or_default()
+                    .push((enum_name.clone(), item));
+            }
+            enum_name
+        })
+        .collect::<Vec<_>>();
     tokens.extend(quote! {
         #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         pub enum Language {
             #(#variant_idents),*
+        }
+
+        impl Language {
+            pub fn all() -> Vec<Self> {
+                vec![#(Self::#variant_idents),*]
+            }
         }
     });
 
