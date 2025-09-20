@@ -13,6 +13,7 @@ sha2.workspace = true
 hex.workspace = true
 rand.workspace = true
 serde = { workspace = true, features = ["derive"] }
+anyhow.workspace = true
 
 [dev-dependencies]
 tokio = { workspace = true, features = ["full"] }

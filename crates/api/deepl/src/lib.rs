@@ -59,7 +59,7 @@ impl AsyncTranslator for DeeplTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let mut t = self
             .translate_vec(&vec![query.to_owned()], None, from, to)
             .await?;
@@ -75,7 +75,7 @@ impl AsyncTranslator for DeeplTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let body = match from {
             Some(s) => json!({"text": query,
                 "source_lang": s.to_deepl(),

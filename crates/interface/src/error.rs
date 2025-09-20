@@ -10,10 +10,6 @@ pub enum Error {
     UnknownLanguage(Language),
     #[error("Translator doesnt support this language")]
     UnknownLanguageGroup(Language, Language),
-    #[error("CTranslator")]
-    CTranslator(anyhow::Error),
-    #[error("Model load error")]
-    ModelLoadError(anyhow::Error),
     #[error("failed to convert string to language")]
     CouldNotMapLanguage(Option<String>),
     #[error("api did not return a response")]

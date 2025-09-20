@@ -9,6 +9,7 @@ reqwest = { workspace = true, features = ["json"] }
 serde = { workspace = true, features = ["derive"] }
 aio-translator-interface = { workspace = true }
 async-trait.workspace = true
+anyhow.workspace = true
 
 [dev-dependencies]
 tokio = { workspace = true, features = ["full"] }

@@ -2,9 +2,7 @@ use std::sync::{Arc, Mutex};
 
 use aio_translator_interface::{
     BlockingTranslator, Language, Model, Translator, TranslatorMutTrait, TranslatorTrait,
-    error::{self, Error},
-    prompt::PromptBuilder,
-    tokenizer::SentenceTokenizer,
+    error::Error, prompt::PromptBuilder, tokenizer::SentenceTokenizer,
 };
 use ct2rs::{BatchType, ComputeType, Config, Device, Tokenizer, TranslationOptions};
 
@@ -82,7 +80,7 @@ impl BlockingTranslator for NLLBTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<String, error::Error> {
+    ) -> anyhow::Result<String> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -93,29 +91,27 @@ impl BlockingTranslator for NLLBTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<Vec<String>, error::Error> {
+    ) -> anyhow::Result<Vec<String>> {
         let from = from.to_nllb().ok_or(Error::UnknownLanguage(from))?;
         let to = to.to_nllb().ok_or(Error::UnknownLanguage(to.clone()))?;
         *self.from.lock().unwrap() = from.to_owned();
 
-        let model = self.load().map_err(error::Error::ModelLoadError)?;
+        let model = self.load()?;
 
-        let trans = model
-            .translate_batch_with_target_prefix(
-                query,
-                &vec![vec![to.to_string()]; query.len()],
-                &TranslationOptions {
-                    batch_type: BatchType::Examples,
-                    repetition_penalty: 3.0,
-                    replace_unknowns: true,
-                    disable_unk: true,
-                    return_alternatives: false,
-                    beam_size: 5,
-                    ..Default::default()
-                },
-                None,
-            )
-            .map_err(Error::CTranslator)?;
+        let trans = model.translate_batch_with_target_prefix(
+            query,
+            &vec![vec![to.to_string()]; query.len()],
+            &TranslationOptions {
+                batch_type: BatchType::Examples,
+                repetition_penalty: 3.0,
+                replace_unknowns: true,
+                disable_unk: true,
+                return_alternatives: false,
+                beam_size: 5,
+                ..Default::default()
+            },
+            None,
+        )?;
         Ok(trans.into_iter().map(|v| v.0).collect())
     }
 }
@@ -152,9 +148,7 @@ impl ModelLoad for NLLBTranslator {
                 compute_type: self.compute_type,
                 ..Default::default()
             },
-        )
-        .map_err(Error::CTranslator)
-        .unwrap();
+        )?;
 
         self.loaded_models = Some(v);
         Ok(self.loaded_models.as_mut().unwrap())

@@ -45,7 +45,7 @@ impl AsyncTranslator for GoogleTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let mut v = self
             .translate_vec(&vec![query.to_owned()], None, from, to)
             .await?;
@@ -61,7 +61,7 @@ impl AsyncTranslator for GoogleTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let resp: Root1 = self
             .client
             .post(format!(

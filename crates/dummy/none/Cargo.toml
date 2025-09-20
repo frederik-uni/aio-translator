@@ -7,3 +7,4 @@ publish = false
 [dependencies]
 aio-translator-interface.workspace = true
 reqwest.workspace = true
+anyhow.workspace = true

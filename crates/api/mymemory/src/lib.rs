@@ -51,7 +51,7 @@ impl AsyncTranslator for MyMemoryTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         input_limit_checker(query, self.input_limit)?;
         let from_orig = from;
         let from = match from {
@@ -73,14 +73,16 @@ impl AsyncTranslator for MyMemoryTranslator {
             .send()
             .await?;
         if !response.status().is_success() {
-            return Err(Error::RequestFailed(response.status().as_u16()));
+            Err(Error::RequestFailed(response.status().as_u16()))?;
+            unreachable!()
         }
         let resp: Value = response.json().await?;
         let resp = &resp["responseData"];
         let lang = resp["detectedLanguage"].to_string();
         let mut text = resp["translatedText"].to_string();
         if text == "null" {
-            return Err(Error::NoResponse);
+            Err(Error::NoResponse)?;
+            unreachable!()
         }
         if text.starts_with('"') && text.ends_with('"') {
             text = text[1..text.len() - 1].to_string();
@@ -101,7 +103,7 @@ impl AsyncTranslator for MyMemoryTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let t = self.translate(&query.join("_._._"), None, from, to).await?;
         Ok(TranslationListOutput {
             text: t

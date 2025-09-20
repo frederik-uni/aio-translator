@@ -1,5 +1,5 @@
 use aio_translator_interface::{
-    BlockingTranslator, Language, Translator, TranslatorMutTrait, TranslatorTrait, error::Error,
+    BlockingTranslator, Language, Translator, TranslatorMutTrait, TranslatorTrait,
     prompt::PromptBuilder,
 };
 
@@ -32,7 +32,7 @@ impl BlockingTranslator for OriginalTranslator {
         _: Option<PromptBuilder>,
         _: Language,
         _: &Language,
-    ) -> Result<String, Error> {
+    ) -> anyhow::Result<String> {
         Ok(input.to_owned())
     }
 
@@ -42,7 +42,7 @@ impl BlockingTranslator for OriginalTranslator {
         _: Option<PromptBuilder>,
         _: Language,
         _: &Language,
-    ) -> Result<Vec<String>, Error> {
+    ) -> anyhow::Result<Vec<String>> {
         Ok(items.to_vec())
     }
 }

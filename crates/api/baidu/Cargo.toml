@@ -11,6 +11,7 @@ reqwest = { workspace = true, features = ["json"] }
 aio-translator-interface.workspace = true
 async-trait.workspace = true
 md5.workspace = true
+anyhow.workspace = true
 
 [dev-dependencies]
 tokio = { workspace = true, features = ["full"] }

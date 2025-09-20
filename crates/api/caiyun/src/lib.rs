@@ -34,7 +34,7 @@ impl AsyncTranslator for CaiyunTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let mut v = self
             .translate_vec(&vec![query.to_owned()], None, from, to)
             .await?;
@@ -50,7 +50,7 @@ impl AsyncTranslator for CaiyunTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let f = from;
         let from = match from {
             Some(from) => from.to_caiyun().ok_or(Error::UnknownLanguage(from))?,

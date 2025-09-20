@@ -63,6 +63,7 @@ dependencies = [
  "aio-translator-sugoi",
  "aio-translator-whatlang",
  "aio-translator-youdao",
+ "anyhow",
  "arabic_reshaper",
  "async-trait",
  "ct2rs",
@@ -75,6 +76,7 @@ name = "aio-translator-baidu"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "iso-639",
  "md5",
@@ -90,6 +92,7 @@ name = "aio-translator-caiyun"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "dotenv",
  "reqwest",
@@ -128,6 +131,7 @@ name = "aio-translator-google"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "dotenv",
  "reqwest",
@@ -231,6 +235,7 @@ name = "aio-translator-mymemory"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "dotenv",
  "reqwest",
@@ -257,6 +262,7 @@ name = "aio-translator-none"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "reqwest",
 ]
 
@@ -265,6 +271,7 @@ name = "aio-translator-original"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "reqwest",
 ]
 
@@ -273,6 +280,7 @@ name = "aio-translator-papago"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "base64 0.22.1",
  "hmac",
@@ -325,6 +333,7 @@ name = "aio-translator-youdao"
 version = "1.0.0"
 dependencies = [
  "aio-translator-interface",
+ "anyhow",
  "async-trait",
  "dotenv",
  "hex",

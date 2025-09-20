@@ -2,7 +2,7 @@ use std::{collections::HashMap, path::PathBuf};
 
 use aio_translator_interface::{
     BlockingTranslator, Language, Model, Translator, TranslatorMutTrait, TranslatorTrait,
-    error::{self, Error},
+    error::{self},
     prompt::PromptBuilder,
     tokenizer::SentenceTokenizer,
 };
@@ -94,7 +94,7 @@ impl BlockingTranslator for JParaCrawlTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<String, error::Error> {
+    ) -> anyhow::Result<String> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -105,15 +105,16 @@ impl BlockingTranslator for JParaCrawlTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<Vec<String>, error::Error> {
+    ) -> anyhow::Result<Vec<String>> {
         let eng_src = match (from, to) {
             (Language::English, Language::Japanese) => true,
             (Language::Japanese, Language::English) => false,
             _ => {
-                return Err(error::Error::UnknownLanguageGroup(from, to.clone()));
+                Err(error::Error::UnknownLanguageGroup(from, to.clone()))?;
+                false
             }
         };
-        self.load().map_err(error::Error::ModelLoadError)?;
+        self.load()?;
 
         let (from, to) = match eng_src {
             true => ("en", "ja"),
@@ -147,30 +148,23 @@ impl BlockingTranslator for JParaCrawlTranslator {
                     ..Default::default()
                 },
                 None,
-            )
-            .map_err(Error::CTranslator)?;
+            )?;
 
         Ok(trans.into_iter().map(|v| v.0).collect())
     }
 }
 
 impl JParaCrawlTranslator {
-    fn custom_load(&mut self, name: &str, en_ja: bool) -> Result<(), error::Error> {
+    fn custom_load(&mut self, name: &str, en_ja: bool) -> anyhow::Result<()> {
         if self.loaded_models.contains_key(name) {
             return Ok(());
         }
-        let model = self
-            .download_model(name, &format!("{}/model.bin", name))
-            .map_err(error::Error::ModelLoadError)?;
-        let ja_path = self
-            .download_model("spm.nopretok", "spm.nopretok/spm.ja.nopretok.model")
-            .map_err(error::Error::ModelLoadError)?;
-        let en_path = self
-            .download_model("spm.nopretok", "spm.nopretok/spm.en.nopretok.model")
-            .map_err(error::Error::ModelLoadError)?;
+        let model = self.download_model(name, &format!("{}/model.bin", name))?;
+        let ja_path = self.download_model("spm.nopretok", "spm.nopretok/spm.ja.nopretok.model")?;
+        let en_path = self.download_model("spm.nopretok", "spm.nopretok/spm.en.nopretok.model")?;
 
         let model = model.parent().map(|v| v.to_path_buf()).unwrap_or(model);
-        let my = MyTokenizer::new(en_ja, ja_path, en_path).map_err(error::Error::ModelLoadError)?;
+        let my = MyTokenizer::new(en_ja, ja_path, en_path)?;
 
         let v = ct2rs::Translator::with_tokenizer(
             model,
@@ -183,8 +177,7 @@ impl JParaCrawlTranslator {
                 compute_type: self.compute_type,
                 ..Default::default()
             },
-        )
-        .map_err(Error::CTranslator)?;
+        )?;
         if self.single_loaded {
             self.loaded_models.drain();
         }

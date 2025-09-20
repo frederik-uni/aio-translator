@@ -37,7 +37,7 @@ impl<T: Translator + Send + Sync> AsyncTranslator for StyleTransfer<T> {
         context: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         if from == Some(*to) {
             return Ok(TranslationOutput {
                 text: query.to_owned(),
@@ -63,7 +63,7 @@ impl<T: Translator + Send + Sync> AsyncTranslator for StyleTransfer<T> {
         context: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         if from == Some(*to) {
             return Ok(TranslationListOutput {
                 text: query.to_owned(),
@@ -96,7 +96,7 @@ impl<T: Translator + Send + Sync> BlockingTranslator for StyleTransfer<T> {
         context: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<String, Error> {
+    ) -> anyhow::Result<String> {
         if from == *to {
             return Ok(query.to_owned());
         }
@@ -115,7 +115,7 @@ impl<T: Translator + Send + Sync> BlockingTranslator for StyleTransfer<T> {
         context: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<Vec<String>, Error> {
+    ) -> anyhow::Result<Vec<String>> {
         if from == *to {
             return Ok(query.to_owned());
         }

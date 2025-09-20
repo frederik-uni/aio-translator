@@ -39,7 +39,7 @@ impl AsyncTranslator for BaiduTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let to = to.to_baidu().ok_or(Error::UnknownLanguage(to.clone()))?;
         let from = match from {
             Some(item) => item.to_baidu().ok_or(Error::UnknownLanguage(item))?,
@@ -57,10 +57,11 @@ impl AsyncTranslator for BaiduTranslator {
         let resp = match resp {
             Response::Ok(v) => v,
             Response::Err(v) => {
-                return Err(Error::ApiError(ApiError::Baidu {
+                Err(Error::ApiError(ApiError::Baidu {
                     message: v.solution().to_owned(),
                     code: v.code,
-                }));
+                }))?;
+                unreachable!()
             }
         };
         Ok(TranslationOutput {
@@ -82,7 +83,7 @@ impl AsyncTranslator for BaiduTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let v = self.translate(&query.join("\n"), None, from, to).await?;
         Ok(TranslationListOutput {
             text: v.text.split('\n').map(|v| v.to_string()).collect(),

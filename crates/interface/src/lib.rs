@@ -2,7 +2,7 @@ pub mod error;
 pub mod prompt;
 pub mod tokenizer;
 
-use crate::{error::Error, prompt::PromptBuilder};
+use crate::prompt::PromptBuilder;
 use aio_translator_lang_generator::generate_language;
 pub use interface_model::Model;
 
@@ -25,7 +25,7 @@ pub trait BlockingTranslator: Send + Sync {
         context: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<String, Error>;
+    ) -> anyhow::Result<String>;
 
     fn translate_vec(
         &mut self,
@@ -33,7 +33,7 @@ pub trait BlockingTranslator: Send + Sync {
         context: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<Vec<String>, Error>;
+    ) -> anyhow::Result<Vec<String>>;
 }
 
 pub enum TranslatorTrait<'a> {
@@ -72,7 +72,7 @@ pub trait AsyncTranslator: Send + Sync {
         context: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error>;
+    ) -> anyhow::Result<TranslationOutput>;
 
     async fn translate_vec(
         &self,
@@ -80,7 +80,7 @@ pub trait AsyncTranslator: Send + Sync {
         context: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error>;
+    ) -> anyhow::Result<TranslationListOutput>;
 }
 
 /// Translation Result containing the translation and the language

@@ -55,7 +55,7 @@ impl AsyncTranslator for PapagoTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let from = from
             .map(|v| v.to_papago().ok_or(Error::UnknownLanguage(v)))
             .unwrap_or(Ok("auto"))?;
@@ -110,7 +110,7 @@ impl AsyncTranslator for PapagoTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let t = self.translate(&query.join("\n"), None, from, to).await?;
         Ok(TranslationListOutput {
             text: t

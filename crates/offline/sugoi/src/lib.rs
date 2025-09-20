@@ -91,7 +91,7 @@ impl SugoiTranslator {
         &self,
         sentences: Vec<String>,
         query_split_sizes: Vec<usize>,
-    ) -> Result<Vec<String>, Error> {
+    ) -> anyhow::Result<Vec<String>> {
         Ok(detokenize(sentences, query_split_sizes))
     }
 }
@@ -117,7 +117,7 @@ impl BlockingTranslator for SugoiTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<String, error::Error> {
+    ) -> anyhow::Result<String> {
         let mut arr = self.translate_vec(&vec![query.to_owned()], None, from, to)?;
         Ok(arr.remove(0))
     }
@@ -128,30 +128,28 @@ impl BlockingTranslator for SugoiTranslator {
         _: Option<PromptBuilder>,
         from: Language,
         to: &Language,
-    ) -> Result<Vec<String>, error::Error> {
+    ) -> anyhow::Result<Vec<String>> {
         if let (Language::Japanese, Language::English) = (from, to) {
         } else {
-            return Err(error::Error::UnknownLanguageGroup(from, to.clone()));
+            Err(error::Error::UnknownLanguageGroup(from, to.clone()))?;
         };
 
         let (query, query_split_sizes) = self.pre_tokenize(query)?;
-        let model = self.load().map_err(error::Error::ModelLoadError)?;
-        let trans = model
-            .translate_batch(
-                &query,
-                &TranslationOptions {
-                    batch_type: BatchType::Examples,
-                    beam_size: 5,
-                    repetition_penalty: 3.0,
-                    num_hypotheses: 1,
-                    replace_unknowns: true,
-                    disable_unk: true,
-                    return_alternatives: false,
-                    ..Default::default()
-                },
-                None,
-            )
-            .map_err(Error::CTranslator)?;
+        let model = self.load()?;
+        let trans = model.translate_batch(
+            &query,
+            &TranslationOptions {
+                batch_type: BatchType::Examples,
+                beam_size: 5,
+                repetition_penalty: 3.0,
+                num_hypotheses: 1,
+                replace_unknowns: true,
+                disable_unk: true,
+                return_alternatives: false,
+                ..Default::default()
+            },
+            None,
+        )?;
         self.post_detokenize(trans.into_iter().map(|v| v.0).collect(), query_split_sizes)
     }
 }
@@ -204,9 +202,7 @@ impl ModelLoad for SugoiTranslator {
                 compute_type: self.compute_type,
                 ..Default::default()
             },
-        )
-        .map_err(Error::CTranslator)
-        .unwrap();
+        )?;
         self.loaded_models = Some(v);
         Ok(self.loaded_models.as_mut().unwrap())
     }

@@ -27,6 +27,7 @@ arabic_reshaper.workspace = true
 unicode-general-category = "1.0.0"
 async-trait.workspace = true
 ct2rs = { workspace = true, default-features = false, features = ["vendored"] }
+anyhow.workspace = true
 
 [features]
 lingua = ["dep:aio-translator-lingua"]

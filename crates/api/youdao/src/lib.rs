@@ -71,7 +71,7 @@ impl AsyncTranslator for YoudaoTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationOutput, Error> {
+    ) -> anyhow::Result<TranslationOutput> {
         let mut t = self
             .translate_vec(&vec![query.to_owned()], None, from, to)
             .await?;
@@ -87,7 +87,7 @@ impl AsyncTranslator for YoudaoTranslator {
         _: Option<PromptBuilder>,
         from: Option<Language>,
         to: &Language,
-    ) -> Result<TranslationListOutput, Error> {
+    ) -> anyhow::Result<TranslationListOutput> {
         let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
         let curtime = now.as_secs();
         let nanos = now.subsec_nanos();
